@@ -1,0 +1,73 @@
+body {
+  background-color: thistle;
+  font-size: 18px;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: -webkit-fill-available;
+}
+
+.App h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.taskList {
+  display: flex;
+  justify-content: center;
+  max-width: 50%;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgb(184, 143, 184);
+}
+
+.task {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.task input {
+  margin: 1em;
+}
+
+form, .taskContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 1em;
+  align-items: center;
+}
+
+form input, form button, .deleteTask {
+  border-radius: 20px;
+  font-size: 18px;
+  border: 1px solid silver;
+}
+
+form input {
+  width: 100%;
+}
+
+form button, .deleteTask {
+  background-color: teal;
+  border: none;
+  color: white;
+  padding: 1% 2%;
+}
+
+.deleteTask {
+  height: fit-content;
+}
+
+form button:hover, .deleteTask:hover {
+  cursor: pointer;
+  background-color: turquoise;
+}
