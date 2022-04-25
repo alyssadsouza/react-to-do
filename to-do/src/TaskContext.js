@@ -4,16 +4,7 @@ export const TaskContext = createContext();
 
 export const TaskProvider = (props) => {
 
-    const [tasks, setTasks] = useState([
-        {
-            "task": "Wash dishes",
-            "done": true
-        },
-        {
-            "task": "Fold laundry",
-            "done": false
-        }
-    ]);
+    const [tasks, setTasks] = useState([]);
 
     return (
         <TaskContext.Provider value={[tasks, setTasks]}>

@@ -3,10 +3,23 @@ import './App.css';
 import { TaskContext } from './TaskContext';
 import Task from './Task';
 
-function TaskList() {
+var idNum = 0;
+
+function TaskList({filter}) {
 
     const [tasks, setTasks] = useContext(TaskContext);
     const [task, setTask] = useState("");
+
+    const filteredTasks = tasks.filter(task => {
+        if (filter === "all") {
+            return true;
+        }
+        else if (filter === "incomplete") {
+            return !task.done;
+        } else {
+            return task.done;
+        }
+    })
 
     const updateTask = (e) => {
         setTask(e.target.value);
@@ -15,26 +28,31 @@ function TaskList() {
     const addTask = (e) => {
         e.preventDefault();
         if (task.length > 0) {
-            setTasks(prevTasks => [...prevTasks, {"task": task, "done": false}]);
+            setTasks(prevTasks => [...prevTasks, {"task": task, "done": false, "id": ++idNum}]);
             setTask("");
         }
     }
 
-    const deleteTask = (task) => {
-        let index = tasks.findIndex((curTask) => {
-            return curTask.task === task;
-        })
-        const newTasks = tasks.slice(0);
-        newTasks.splice(index, 1);
-        setTasks(newTasks);
+    const deleteTask = (id) => {
+        setTasks(tasks.filter((task) => {return task.id !== id}));
+    }
+
+    const checkTask = (id) => {
+        setTasks(tasks.map(task => {
+            if (task.id === id) {
+                return {...task, "done": !task.done};
+            } else {
+                return task;
+            }
+        }));
     }
 
     return (
     <div className="taskList">
-        {tasks.map(task => (
+        {filteredTasks.map(task => (
             <div className='taskContainer'>
-                <Task done={task.done} task={task.task} />
-                <button className="deleteTask" onClick={() => deleteTask(task.task)}>𐄂</button>
+                <Task done={task.done} task={task.task} key={task.id} check = {() => checkTask(task.id)} />
+                <button className="deleteTask" onClick={() => deleteTask(task.id)}>𐄂</button>
             </div>
         ))}
         <form className='addTask' onSubmit={addTask}>

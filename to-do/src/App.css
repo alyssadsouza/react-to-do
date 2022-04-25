@@ -16,6 +16,15 @@ body {
   width: 100%;
 }
 
+.filterContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.filterMethod {
+  font-size: 24px;
+}
+
 .taskList {
   display: flex;
   justify-content: center;
